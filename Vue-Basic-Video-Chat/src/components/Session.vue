@@ -43,9 +43,11 @@ export default {
     });
 
     this.session.on('streamCreated', event => {
+      console.log('streamCreated event', event)
       this.streams.push(event.stream);
     });
     this.session.on('streamDestroyed', event => {
+      console.log('streamDestroyed event', event)
       const idx = this.streams.indexOf(event.stream);
       if (idx > -1) {
         this.streams.splice(idx, 1);
