@@ -1,6 +1,6 @@
 <template>
   <div id="session" @error="errorHandler">
-    <publisher :session="session" @error="errorHandler"></publisher>
+    <publisher :session="session" @error="errorHandler" :opts="publisherProperties"></publisher>
     <div id="subscribers" v-for="stream in streams" :key="stream.streamId">
       <subscriber @error="errorHandler" :stream="stream" :session="session"></subscriber>
     </div>
@@ -56,7 +56,15 @@ export default {
   },
   data: () => ({
     streams: [],
-    session: null
+    session: null,
+    publisherProperties: {
+      audioBitrate: 8000, // NC:64000
+      audioFallbackEnabled: falase, // NC: false
+      autoGainControl: true, // default true
+      disableAudioProcessing: false, // default false
+      echoCancellation: true, // default: true
+      enableStereo: false, // default: false
+    }
   }),
   methods: {
     errorHandler
